@@ -5,7 +5,8 @@
 #![allow(dead_code)]
 
 // TODO: add the imports you need (the pattern and generation prompts use
-// crate::input::read_int; waiting for Enter uses std::io).
+//crate::input::read_int; 
+//std::io;
 
 const ROWS: usize = 10;
 const COLS: usize = 20;
@@ -62,8 +63,14 @@ pub fn print_neighbor_counts(grid: &Grid) {
 
 // The next generation. Read from `grid` and write to a NEW grid, so a cell is never
 // judged using neighbors that have already been updated.
-pub fn next_generation(_grid: &Grid) -> Grid {
-    todo!("Implement next_generation")
+pub fn next_generation(grid: &Grid) -> Grid {
+    let mut next = new_grid();
+    for r in 0..ROWS{
+	for c in 0..COLS{
+	    next[r][c] = next_state(grid[r][c],count_neighbors(grid,r,c));
+	}
+    }
+next
 }
 
 // Preset patterns placed near the middle of the grid (the glider starts near the
