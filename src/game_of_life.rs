@@ -78,8 +78,25 @@ next
 //   1 = blinker: three cells in a row
 //   2 = block: a 2x2 square
 //   3 = glider: five cells
-pub fn load_pattern(_choice: u32) -> Grid {
-    todo!("Implement load_pattern")
+pub fn load_pattern(choice: u32) -> Grid {
+    let mut grid = new_grid();
+    if choice == 1{
+	grid[4][9] = true;
+	grid[4][10] = true;
+	grid[4][11] = true;
+    }else if choice == 2{
+	grid[4][10] = true;
+	grid[4][11] = true;
+	grid[5][10] = true;
+	grid[5][11] = true;
+    }else{
+	grid[1][2] = true;
+	grid[2][3] = true;
+	grid[3][1] = true;
+	grid[3][2] = true;
+	grid[3][3] = true;
+    }
+grid
 }
 
 // Number of live cells.
