@@ -5,8 +5,8 @@
 #![allow(dead_code)]
 
 // TODO: add the imports you need (the pattern and generation prompts use
-//crate::input::read_int; 
-//std::io;
+use crate::input::{read_int, read_line_trimmed}; 
+use std::io;
 
 const ROWS: usize = 10;
 const COLS: usize = 20;
@@ -117,17 +117,18 @@ count
 // 2 block, 3 glider), ask how many generations, then print each generation with its
 // number and population, waiting for Enter between steps.
 pub fn play() {
-    let mut grid = new_grid();
-    grid[4][10] = true;
-    grid[5][10] = true;
-    grid[6][10] = true;
-    print_grid(&grid);
-    println!();
-    print_neighbor_counts(&grid);
-    println!();
-    let alive = grid[5][10];
-    let neighbors = count_neighbors(&grid, 5, 10);
-    println!("Center cell next generation: {}", if next_state(alive, neighbors) { "alive" } else { "dead" });
+    println!("1) Blinker  2) Block  3) Glider)");
+    let player_input: u32 = read_int(":",1,3);
+    let mut grid = load_pattern(player_input);
+    println!("How Many Generations?");
+    let generation: u32 = read_int(":",0,10);
+    for i in 0..=generation{
+	println!(" ");
+	print_grid(&grid);
+	grid = next_generation(&grid);
+	println!("Press Enter To Continue");
+	read_line_trimmed();
+    }
 }
 
 #[cfg(test)]
