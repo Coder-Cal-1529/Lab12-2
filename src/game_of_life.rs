@@ -113,9 +113,10 @@ pub fn play() {
     let player_input: u32 = read_int(":",1,3);
     let mut grid = load_pattern(player_input);
     println!("How Many Generations?");
-    let generation: u32 = read_int(":",0,10);
+    let generation: u32 = read_int(":",0,30);
     for i in 0..=generation{
 	println!("Current Generation: {}", i);
+	println!("Current Population: {}", population(&grid));
 	println!(" ");
 	print_grid(&grid);
 	grid = next_generation(&grid);
