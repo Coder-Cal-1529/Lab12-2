@@ -80,23 +80,15 @@ next
 //   3 = glider: five cells
 pub fn load_pattern(choice: u32) -> Grid {
     let mut grid = new_grid();
-    if choice == 1{
-	grid[4][9] = true;
-	grid[4][10] = true;
-	grid[4][11] = true;
-    }else if choice == 2{
-	grid[4][10] = true;
-	grid[4][11] = true;
-	grid[5][10] = true;
-	grid[5][11] = true;
-    }else{
-	grid[1][2] = true;
-	grid[2][3] = true;
-	grid[3][1] = true;
-	grid[3][2] = true;
-	grid[3][3] = true;
+    let cells = match choice{
+	1 => vec![(4,9),(4,10),(4,1)], //3
+	2 => vec![(4,10),(4,11),(5,10),(5,11)], //4
+	_ => vec![(1,2),(2,3),(3,1),(3,2),(3,3)], //5
+    };
+    for (r,c) in cells{
+	grid[r][c] = true
     }
-grid
+    grid
 }
 
 // Number of live cells.
