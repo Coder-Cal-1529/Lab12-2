@@ -173,9 +173,17 @@ mod tests {
         let start = grid_from(&[(4, 10), (5, 10), (6, 10)]);
         let after_two = next_generation(&next_generation(&start));
         assert_eq!(after_two, start);
-    }
+    
+}
 
     // TODO (student): the glider test (after four generations on an empty grid the
     // population is 5 and the shape has moved one row and one column along its
     // direction of travel), and one more test of your own choosing.
+    #[test]
+    fn glider_moves_one_down_one_right(){
+	let start = grid_from(&[(1,2),(2,3),(3,1),(3,2),(3,3)]);
+	let after_four = next_generation(&next_generation(&next_generation(&next_generation(&start))));
+	let after_four_check = grid_from(&[(2,3),(3,4),(4,2),(4,3),(4,4)]);
+	assert_eq!(after_four_check, after_four);
+}
 }
