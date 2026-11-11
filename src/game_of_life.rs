@@ -115,6 +115,7 @@ pub fn play() {
     println!("How Many Generations?");
     let generation: u32 = read_int(":",0,10);
     for i in 0..=generation{
+	println!("Current Generation: {}", i);
 	println!(" ");
 	print_grid(&grid);
 	grid = next_generation(&grid);
