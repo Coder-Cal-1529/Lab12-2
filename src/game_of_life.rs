@@ -81,7 +81,7 @@ next
 pub fn load_pattern(choice: u32) -> Grid {
     let mut grid = new_grid();
     let cells = match choice{
-	1 => vec![(4,9),(4,10),(4,1)], //3
+	1 => vec![(4,9),(4,10),(4,11)], //3
 	2 => vec![(4,10),(4,11),(5,10),(5,11)], //4
 	_ => vec![(1,2),(2,3),(3,1),(3,2),(3,3)], //5
     };
@@ -174,7 +174,7 @@ mod tests {
         let after_two = next_generation(&next_generation(&start));
         assert_eq!(after_two, start);
     
-}
+    }
 
     // TODO (student): the glider test (after four generations on an empty grid the
     // population is 5 and the shape has moved one row and one column along its
@@ -185,5 +185,13 @@ mod tests {
 	let after_four = next_generation(&next_generation(&next_generation(&next_generation(&start))));
 	let after_four_check = grid_from(&[(2,3),(3,4),(4,2),(4,3),(4,4)]);
 	assert_eq!(after_four_check, after_four);
-}
+    }
+
+    #[test]
+    fn blinker_after_one_gen(){
+        let start = grid_from(&[(4,9),(4,10),(4,11)]);
+        let next_gen = next_generation(&start);
+        let next_gen_check = grid_from(&[(3,10),(4,10),(5,10)]);
+        assert_eq!(next_gen, next_gen_check);
+    }
 }
